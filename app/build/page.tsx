@@ -4,6 +4,7 @@ import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Slider } from "@heroui/react";
+import { play } from "cuelume";
 import { DitherConfetti } from "@/components/DitherConfetti";
 import { Mascot } from "@/components/Mascot";
 import { VendorMark } from "@/components/brands";
@@ -365,6 +366,7 @@ function Builder() {
       setTimeout(() => setPreviewState(agent.mascot), 900);
     } catch (e) {
       setDocError(e instanceof Error ? e.message : "generation failed");
+      play("error");
     } finally {
       setGeneratingDoc(null);
     }
@@ -387,6 +389,7 @@ function Builder() {
     setPreviewState("cooking");
     saveAgent(agent);
     setSaved(true);
+    play("success");
     // A counter rather than a boolean: saving twice in a row has to re-fire,
     // and a flag that is already true is not a state change.
     setConfettiToken((n) => n + 1);

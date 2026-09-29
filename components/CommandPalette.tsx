@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { play } from "cuelume";
 import { clsx } from "@/lib/clsx";
 import { copyText } from "@/lib/copy";
 import { KIND_META, kindOfArg } from "@/lib/aitmpl";
@@ -144,6 +145,7 @@ export function CommandPalette() {
       setClosing(false);
     }
     setOpen(true);
+    play("bloom");
   }, []);
 
   const close = useCallback(() => {
@@ -152,6 +154,7 @@ export function CommandPalette() {
     if (closeTimer.current) return;
     setShown(false);
     setClosing(true);
+    play("droplet");
     closeTimer.current = setTimeout(() => {
       closeTimer.current = null;
       setOpen(false);
@@ -326,6 +329,7 @@ export function CommandPalette() {
 
   const choose = async (row: Row) => {
     if (row.kind === "page") {
+      play("release");
       close();
       router.push(row.href);
       return;
@@ -482,6 +486,7 @@ export function CommandPalette() {
               aria-selected={i === active}
               aria-disabled={row.kind === "component" && !row.command}
               data-active={i === active}
+              data-cuelume-hover="tick"
               onMouseEnter={() => setActive(i)}
               onClick={() => choose(row)}
               className={clsx(

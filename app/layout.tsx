@@ -5,6 +5,7 @@ import { Habibi, Silkscreen } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { InlineScript } from "@/components/InlineScript";
 import { CommandPalette } from "@/components/CommandPalette";
+import { SoundBind } from "@/components/SoundBind";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SITE_URL } from "@/lib/site";
@@ -98,6 +99,8 @@ export default function RootLayout({
         {/* Global so ⌘K reaches every route, including the ones with no
             SkillBrowser on them. Renders nothing until opened. */}
         <CommandPalette />
+        {/* Wires data-cuelume-* listeners once for the whole document. */}
+        <SoundBind />
         {/* Last child of body so it never delays first paint. Injects nothing
             outside Vercel, so local dev and any other host stay untouched. */}
         <Analytics />

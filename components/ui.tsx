@@ -93,6 +93,8 @@ export function PixelButton({
   return (
     <button
       {...rest}
+      data-cuelume-press
+      data-cuelume-release
       className={clsx(
         // No extra tracking and never wrap: Silkscreen already ships wide
         // sidebearings, so `tracking-wide` on an uppercase label pushed short

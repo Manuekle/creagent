@@ -97,6 +97,7 @@ export function Nav() {
                   key={l.href}
                   href={hrefFor(l, locked)}
                   title={locked ? `${l.label} needs an account — see the demo` : undefined}
+                  data-cuelume-hover="tick"
                   className={clsx(
                     "font-mono text-xs px-2 sm:px-3 py-1.5 border-2 transition-colors inline-flex items-center gap-1",
                     isActive(path, l)

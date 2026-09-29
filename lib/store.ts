@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { play } from "cuelume";
 import type { Agent } from "./types";
 import { normalizeGraph } from "./graph";
 import { supabaseBrowser } from "./supabase/client";
@@ -53,6 +54,9 @@ function emit() {
 function setError(message: string | null) {
   if (lastError === message) return;
   lastError = message;
+  // Only the transition into an error is a cue-worthy outcome — clearing it
+  // (message === null) is silent, or every mount of a clean store would honk.
+  if (message) play("error");
   emit();
 }
 
